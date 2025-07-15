@@ -8,17 +8,17 @@ export async function sendGotifyNotification(title, message, priority = 5) {
   }
 
   try {
-    const response = await fetch(`${gotifyUrl}/message`, {
+    const formData = new URLSearchParams();
+    formData.append('title', title);
+    formData.append('message', message);
+    formData.append('priority', priority.toString());
+
+    const response = await fetch(`${gotifyUrl}/message?token=${gotifyToken}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-Gotify-Key': gotifyToken
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: JSON.stringify({
-        title: title,
-        message: message,
-        priority: priority
-      })
+      body: formData
     });
 
     if (response.ok) {

@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import { setTimeout } from 'node:timers/promises'
+import { sendGotifyNotification } from './gotify.mjs'
 
 const browser = await puppeteer.launch({
     defaultViewport: { width: 1080, height: 1024 },
@@ -21,8 +22,11 @@ try {
     await page.locator('text=引き続き無料VPSの利用を継続する').click()
     await page.waitForNavigation({ waitUntil: 'networkidle2' })
     await page.locator('text=無料VPSの利用を継続する').click()
+    console.log("VPS処理が正常に完了しました");
+    await sendGotifyNotification("VPS処理完了", "VPS処理が正常に完了しました");
 } catch (e) {
     console.error(e)
+    await sendGotifyNotification("VPS処理エラー", `VPS処理でエラーが発生しました: ${e.message}`, 8);
 } finally {
     await setTimeout(5000)
     await recorder.stop()

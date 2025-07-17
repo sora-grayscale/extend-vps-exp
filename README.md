@@ -68,3 +68,4 @@ GitHub Actionsにより以下の時間に自動実行：
 - 日本語: https://motoki-design.co.jp/wordpress/xserver-vps-auto-renew/
 - English: https://motoki-design.co.jp/wordpress/xserver-vps-auto-renew/
 - 中文: https://motoki-design.co.jp/wordpress/xserver-vps-auto-renew/
+
